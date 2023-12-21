@@ -3,8 +3,8 @@ import 'onboarding_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dishes_page.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class FamilyPage extends StatelessWidget {
+  const FamilyPage({super.key});
 
   @override
   Widget build(BuildContext context) {
