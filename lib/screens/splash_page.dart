@@ -13,6 +13,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
         splash: Lottie.asset('assets/NikeSplashScreen.json'),
+        //splash: Lottie.asset('assets/DinnerResto.json'),
         splashIconSize: 250,
         backgroundColor: showHome ? Colors.black: Colors.green,
         pageTransitionType: PageTransitionType.fade,

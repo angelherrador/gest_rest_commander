@@ -26,32 +26,82 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: const EdgeInsets.only(bottom:80),
-        child: PageView(
-            controller: controller,
-            onPageChanged: (index) {
-              setState(() => isLastPage = index == 3);
-              pageNumber = index;
-            },
-            children: [
-              Container(
-                color: Colors.red,
-                child: Center(child: Text('Page $pageNumber',style: const TextStyle(fontSize: 40, color: Colors.white))),
-              ),
-              Container(
-                color: Colors.indigo,
-                child: Center(child: Text('Page $pageNumber',style: const TextStyle(fontSize: 40, color: Colors.white))),
-              ),
-              Container(
-                color: Colors.green,
-                child: Center(child: Text('Page $pageNumber',style: const TextStyle(fontSize: 40, color: Colors.white))),
-              ),
-              Container(
-                color: Colors.orange,
-                child: Center(child: Text('Page $pageNumber',style: const TextStyle(fontSize: 40, color: Colors.white))),
-              ),
-            ]
+      body: SafeArea(
+        child: Container(
+          padding: const EdgeInsets.only(bottom:80),
+          child: PageView(
+              controller: controller,
+              onPageChanged: (index) {
+                setState(() => isLastPage = index == 3);
+                pageNumber = index++;
+              },
+              children: [
+                Column(
+                  children: [
+                    Container(
+                      color: Colors.red,
+                      child: Center(child: Text('Pág $pageNumber',style: const TextStyle(fontSize: 40, color: Colors.white))),
+                    ),
+                    Image.network('https://herradormartinez.es/gestrest/logos/logo1.JPG'),
+                    //const Image(image: AssetImage('assets/logos/logo1.JPG')),
+                    Expanded(
+                      child: Container(
+                        color: Colors.red,
+                        child: const Center(child: Text('Aquí vamos a explicar cositas',style: TextStyle(fontSize: 20, color: Colors.white))),
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Container(
+                      color: Colors.blue,
+                      child: Center(child: Text('Pág $pageNumber',style: const TextStyle(fontSize: 40, color: Colors.white))),
+                    ),
+                    Image.network('https://herradormartinez.es/gestrest/logos/logo2.JPG'),
+                    //const Image(image: AssetImage('assets/logos/logo1.JPG')),
+                    Expanded(
+                      child: Container(
+                        color: Colors.blue,
+                        child: const Center(child: Text('Aquí vamos a explicar cositas',style: TextStyle(fontSize: 20, color: Colors.white))),
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Container(
+                      color: Colors.green,
+                      child: Center(child: Text('Pág $pageNumber',style: const TextStyle(fontSize: 40, color: Colors.white))),
+                    ),
+                    Image.network('https://herradormartinez.es/gestrest/logos/logo3.JPG'),
+                    //const Image(image: AssetImage('assets/logos/logo1.JPG')),
+                    Expanded(
+                      child: Container(
+                        color: Colors.green,
+                        child: const Center(child: Text('Aquí vamos a explicar cositas',style: TextStyle(fontSize: 20, color: Colors.white))),
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Container(
+                      color: Colors.orange,
+                      child: Center(child: Text('Pág $pageNumber',style: const TextStyle(fontSize: 40, color: Colors.white))),
+                    ),
+                    Image.network('https://herradormartinez.es/gestrest/logos/logo4.JPG',),
+                    //const Image(image: AssetImage('assets/logos/logo1.JPG')),
+                    Expanded(
+                      child: Container(
+                        color: Colors.orange,
+                        child: const Center(child: Text('Aquí vamos a explicar cositas',style: TextStyle(fontSize: 20, color: Colors.white))),
+                      ),
+                    ),
+                  ],
+                ),
+              ]
+          ),
         ),
       ),
       bottomSheet: isLastPage ? TextButton(
@@ -66,10 +116,11 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
             await prefs.setBool('showHome', true);
             //https://youtu.be/AmsXazhGMQ0?t=201
 
+            if (!context.mounted) return;
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => const FamilyPage()));
           },
-          child: const Text('Get Started', style: TextStyle(fontSize: 24),)
+          child: const Text('Comenzar...', style: TextStyle(fontSize: 24),)
       ) :
       Container(
         padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -79,7 +130,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           children: [
             TextButton(
                 onPressed: () => controller.jumpToPage(3),
-                child: const Text('Skip',style: TextStyle(fontSize: 20),)),
+                child: const Text('Saltar',style: TextStyle(fontSize: 20),)),
             Center(
               child: SmoothPageIndicator(
                 controller: controller,
@@ -104,7 +155,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   controller.nextPage(
                       duration: const Duration(milliseconds: 500) ,
                       curve: Curves.easeInOut);},
-                child: const Text('Next',style: TextStyle(fontSize: 20),)),
+                child: const Text('Siguiente',style: TextStyle(fontSize: 20),)),
           ],
         ),
       ),

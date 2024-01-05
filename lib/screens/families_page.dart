@@ -92,7 +92,7 @@ class FamilyPage extends StatelessWidget {
             onPressed: () async {
               final SharedPreferences prefs = await SharedPreferences.getInstance();
               await prefs.setBool('showHome', false);
-
+              if (!context.mounted) return;
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => const OnBoardingPage()),
               );
