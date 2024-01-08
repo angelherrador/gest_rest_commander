@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
-class WaiterPage extends StatelessWidget {
+class WaiterPage extends StatefulWidget {
   const WaiterPage({super.key});
 
+  @override
+  State<WaiterPage> createState() => _WaiterPageState();
+}
+
+class _WaiterPageState extends State<WaiterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
