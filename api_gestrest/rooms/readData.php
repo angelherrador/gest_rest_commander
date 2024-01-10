@@ -3,7 +3,7 @@
 error_reporting(0);
 include('../connect.php');
 
-   $sql = "SELECT * FROM `rooms` ORDER BY `name`";
+   $sql = "SELECT * FROM `rooms` ORDER BY `id`";
    $result = $con->query($sql);
 
    while($row = $result->fetch_assoc()){

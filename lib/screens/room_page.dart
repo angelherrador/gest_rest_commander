@@ -14,7 +14,7 @@ class _RoomPageState extends State<RoomPage> {
 
   List list = [];
   String vApiUrl = "https://herradormartinez.es/gestrest/api_gestrest/rooms";
-  String vRoomImageUrl="https://herradormartinez.es/gestrest/images/rooms";
+  String vImageUrl="https://herradormartinez.es/gestrest/images/rooms";
 
   Future readData() async {
     var vFile="readData.php";
@@ -55,6 +55,8 @@ class _RoomPageState extends State<RoomPage> {
 
   @override
   Widget build(BuildContext context) {
+    var imageWidth =
+        MediaQuery.of(context).size.width *0.25; //% del ancho de pantalla
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.blueAccent,
@@ -70,15 +72,15 @@ class _RoomPageState extends State<RoomPage> {
                   itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
                     return ListTile(
-
                       title: Text(snapshot.data![index]['name'],style: const TextStyle(fontSize: 16),),
                       //subtitle: Text(snapshot.data![index]['image']),
+                      subtitle: const Text(" "),
                       leading: InkWell(
                         onTap: (){
                           //getImg(snapshot.data![index]['id']);
                         },
                         child:
-                          Image.network("$vRoomImageUrl/$snapshot.data![index]['image']")
+                          Image.network('${vImageUrl}/${snapshot.data![index]['image']}',width: imageWidth)
                         // CircleAvatar(
                         //   radius: 60,
                         //   foregroundImage: snapshot.data![index]['image'] == "" ? null : NetworkImage('$vRoomImageUrl/'+snapshot.data![index]['image']),

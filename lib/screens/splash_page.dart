@@ -1,5 +1,6 @@
 //import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:gest_rest/screens/waiters_page.dart';
 import 'room_page.dart';
 import 'onboarding_page.dart';
 //import 'package:lottie/lottie.dart';
@@ -22,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => widget.showHome ? const RoomPage() : const OnBoardingPage(),
+            builder: (context) => widget.showHome ? const WaiterPage() : const OnBoardingPage(),
           ));
     });
 
