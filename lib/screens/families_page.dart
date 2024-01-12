@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
-import 'onboarding_page.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'onboarding_page.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 import 'dishes_page.dart';
 
-class FamilyPage extends StatelessWidget {
-  const FamilyPage({super.key});
+class FamilyPage extends StatefulWidget {
+  const FamilyPage({super.key, required this.idWaiter, required this.idTable});
 
+  final String idWaiter;
+  final String idTable;
+
+  @override
+  State<FamilyPage> createState() => _FamilyPageState();
+}
+
+class _FamilyPageState extends State<FamilyPage> {
   @override
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> families = [
@@ -86,19 +94,7 @@ class FamilyPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.amber,
       appBar: AppBar(
-        title: const Text('Favoritos / Familias'),
-        actions: [
-          IconButton(
-            onPressed: () async {
-              final SharedPreferences prefs = await SharedPreferences.getInstance();
-              await prefs.setBool('showHome', false);
-              if (!context.mounted) return;
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => const OnBoardingPage()),
-              );
-            },
-            icon: const Icon(Icons.logout),)
-        ],
+        title: Text('Favoritos / Familias ${widget.idWaiter} - ${widget.idTable}'),
       ),
       body: Column(
         children: [

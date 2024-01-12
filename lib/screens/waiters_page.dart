@@ -1,13 +1,15 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:gest_rest/screens/onboarding_page.dart';
 import 'package:gest_rest/screens/room_page.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class WaiterPage extends StatefulWidget {
-  const WaiterPage({super.key});
+   const WaiterPage({super.key});
 
-  @override
+   @override
   State<WaiterPage> createState() => _WaiterPageState();
 }
 
@@ -16,6 +18,7 @@ class _WaiterPageState extends State<WaiterPage> {
   List list = [];
   String vApiUrl = "https://herradormartinez.es/gestrest/api_gestrest/waiters";
   String vImageUrl="https://herradormartinez.es/gestrest/images/waiters";
+
 
   Future readData() async {
     var vFile="readData.php";
@@ -63,6 +66,18 @@ class _WaiterPageState extends State<WaiterPage> {
           backgroundColor: Colors.blueAccent,
           title: const Text('Selección de camarero'),
           centerTitle: true,
+          actions: [
+            IconButton(
+              onPressed: () async {
+                final SharedPreferences prefs = await SharedPreferences.getInstance();
+                await prefs.setBool('showHome', false);
+                if (!context.mounted) return;
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => const OnBoardingPage()),
+                );
+              },
+              icon: const Icon(Icons.logout),)
+          ],
         ),
         body:
         StreamBuilder<List<dynamic>>(
@@ -75,7 +90,6 @@ class _WaiterPageState extends State<WaiterPage> {
                     return ListTile(
 
                       title: Text(snapshot.data![index]['name'],style: const TextStyle(fontSize: 16),),
-                      //subtitle: Text(snapshot.data![index]['image']),
                       subtitle: const Text(" "),
                       leading: InkWell(
                           onTap: (){
@@ -83,7 +97,7 @@ class _WaiterPageState extends State<WaiterPage> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        const RoomPage()));
+                                        RoomPage(idWaiter : snapshot.data![index]['id'],)));
                           },
                           child:
                           //Image.network('${vImageUrl}/${snapshot.data![index]['image']}',width: imageWidth)

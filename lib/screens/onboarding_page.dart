@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gest_rest/screens/waiters_page.dart';
 import 'families_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -22,6 +23,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
   bool isLastPage = false;
   int pageNumber = 1;
+  String vImageUrl="https://herradormartinez.es/gestrest/images/logos";
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                       color: Colors.red,
                       child: Center(child: Text('Pág $pageNumber',style: const TextStyle(fontSize: 40, color: Colors.white))),
                     ),
-                    Image.network('https://herradormartinez.es/gestrest/logos/logo1.JPG'),
+                    Image.network('${vImageUrl}/logo1.JPG'),
                     //const Image(image: AssetImage('assets/logos/logo1.JPG')),
                     Expanded(
                       child: Container(
@@ -58,7 +60,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                       color: Colors.blue,
                       child: Center(child: Text('Pág $pageNumber',style: const TextStyle(fontSize: 40, color: Colors.white))),
                     ),
-                    Image.network('https://herradormartinez.es/gestrest/logos/logo2.JPG'),
+                    Image.network('${vImageUrl}/logo2.JPG'),
                     //const Image(image: AssetImage('assets/logos/logo1.JPG')),
                     Expanded(
                       child: Container(
@@ -74,7 +76,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                       color: Colors.green,
                       child: Center(child: Text('Pág $pageNumber',style: const TextStyle(fontSize: 40, color: Colors.white))),
                     ),
-                    Image.network('https://herradormartinez.es/gestrest/logos/logo3.JPG'),
+                    Image.network('${vImageUrl}/logo3.JPG'),
                     //const Image(image: AssetImage('assets/logos/logo1.JPG')),
                     Expanded(
                       child: Container(
@@ -90,7 +92,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                       color: Colors.orange,
                       child: Center(child: Text('Pág $pageNumber',style: const TextStyle(fontSize: 40, color: Colors.white))),
                     ),
-                    Image.network('https://herradormartinez.es/gestrest/logos/logo4.JPG',),
+                    Image.network('${vImageUrl}/logo4.JPG',),
                     //const Image(image: AssetImage('assets/logos/logo1.JPG')),
                     Expanded(
                       child: Container(
@@ -118,7 +120,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
             if (!context.mounted) return;
             Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => const FamilyPage()));
+                MaterialPageRoute(builder: (context) => const WaiterPage()));
           },
           child: const Text('Comenzar...', style: TextStyle(fontSize: 24),)
       ) :

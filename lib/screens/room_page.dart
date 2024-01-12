@@ -1,10 +1,13 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:gest_rest/screens/tables_page.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 class RoomPage extends StatefulWidget {
-  const RoomPage({super.key});
+  const RoomPage({super.key, required this.idWaiter});
+
+  final String idWaiter;
 
   @override
   State<RoomPage> createState() => _RoomPageState();
@@ -60,7 +63,7 @@ class _RoomPageState extends State<RoomPage> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.blueAccent,
-          title: const Text('Selección de Sala'),
+          title: Text('Selección de Sala: ${widget.idWaiter}'),
           centerTitle: true,
         ),
         body:
@@ -77,18 +80,17 @@ class _RoomPageState extends State<RoomPage> {
                       subtitle: const Text(" "),
                       leading: InkWell(
                         onTap: (){
-                          //getImg(snapshot.data![index]['id']);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                              builder: (context) =>
+                              TablePage(
+                                idWaiter : widget.idWaiter,
+                                idRoom: snapshot.data![index]['id']
+                              )));
                         },
                         child:
                           Image.network('${vImageUrl}/${snapshot.data![index]['image']}',width: imageWidth)
-                        // CircleAvatar(
-                        //   radius: 60,
-                        //   foregroundImage: snapshot.data![index]['image'] == "" ? null : NetworkImage('$vRoomImageUrl/'+snapshot.data![index]['image']),
-                        //   // child: Text(snapshot.data![index]['name']
-                        //   //     .toString()
-                        //   //     .substring(0, 2)
-                        //   //     .toUpperCase()),
-                        // ),
                       ),
                     );
                   });
