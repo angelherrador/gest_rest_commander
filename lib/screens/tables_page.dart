@@ -17,8 +17,6 @@ class TablePage extends StatefulWidget {
 
 class _TablePageState extends State<TablePage> {
 
-  //late String vRoom=widget.idRoom;
-
   List list = [];
   String vApiUrl = "https://herradormartinez.es/gestrest/api_gestrest/tables";
   String vImageUrl="https://herradormartinez.es/gestrest/images/tables";
@@ -53,13 +51,11 @@ class _TablePageState extends State<TablePage> {
       _stream = _streamController.stream;
     });
 
-    //getData(widget.idRoom);
     getData(widget.idRoom);
   }
 
 
   getData(vRoom) async {
-    //var vNumber=vRoom;
     await readData(vRoom);
   }
 
@@ -94,10 +90,12 @@ class _TablePageState extends State<TablePage> {
                                         FamilyPage(
                                           idWaiter : widget.idWaiter,
                                           idTable : snapshot.data![index]['number'],
-                                        )));
+                                        )
+                                )
+                            );
                           },
                           child:
-                          Image.network('${vImageUrl}/${snapshot.data![index]['image']}',width: imageWidth)
+                          Image.network('$vImageUrl/${snapshot.data![index]['image']}',width: imageWidth)
                       ),
                     );
                   });

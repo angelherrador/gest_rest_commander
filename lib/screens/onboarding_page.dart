@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gest_rest/screens/waiters_page.dart';
-import 'families_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 

@@ -3,14 +3,12 @@
 error_reporting(0);
 include('../connect.php');
 
-   $idFamily = $_GET['idFamily'] ?? 1;
-
+   /*$sql = "SELECT * FROM `dishes` WHERE `favorite` = 1 ORDER BY `name`";*/
    $sql = "SELECT `dishes`.`id`, `dishes`.`name`, `dishes`.`image`, `dishes`.`kitchen`, `dishes`.`idFamily`, `dishes`.`favorite`, `dishes`.`suggestion`,
-           `families`.`directory`
-           FROM `dishes` LEFT JOIN `families` ON `families`.`id` = `dishes`.`idFamily`
-            WHERE  `dishes`.`idFamily` = '$idFamily' ORDER BY  `dishes`.`name`";
+        `families`.`directory`
+        FROM `dishes` LEFT JOIN `families` ON `families`.`id` = `dishes`.`idFamily`
+         WHERE  `dishes`.`favorite` = 1 ORDER BY  `dishes`.`name`";
 
-   //$sql = "SELECT * FROM `dishes` WHERE `idFamily` = '$idFamily' ORDER BY `name`";
    $result = $con->query($sql);
 
    while($row = $result->fetch_assoc()){

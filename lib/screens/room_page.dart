@@ -90,9 +90,27 @@ class _RoomPageState extends State<RoomPage> {
                               )));
                         },
                         child:
-                          Image.network('${vImageUrl}/${snapshot.data![index]['image']}',width: imageWidth)
-                      ),
-                    );
+                          //Image.network('$vImageUrl/${snapshot.data![index]['image']}',width: imageWidth))
+                          Container(
+                              width: 120,
+                              height: 120,
+                              padding: const EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                  color: Colors.grey,
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  image:  DecorationImage(
+                                    image: NetworkImage('$vImageUrl/${snapshot.data![index]['image']}'),
+                                    fit: BoxFit.cover,
+                                  ),
+                                  boxShadow: const [
+                                    BoxShadow(
+                                      color: Colors.grey, //Color(0xffA4A4A4),
+                                      offset: Offset(1.0, 5.0),
+                                      blurRadius: 3.0,
+                                    ),
+                                  ]),
+                          ),
+                      ),);
                   });
             }else if(snapshot.hasError){
               return const Center(child: Text('Se ha producido un error. No hay datos disponibles !!!'));

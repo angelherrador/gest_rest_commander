@@ -59,8 +59,7 @@ class _WaiterPageState extends State<WaiterPage> {
 
   @override
   Widget build(BuildContext context) {
-    var imageWidth =
-        MediaQuery.of(context).size.width *0.25; //% del ancho de pantalla
+    //var imageWidth = MediaQuery.of(context).size.width *0.25; //% del ancho de pantalla
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.blueAccent,
@@ -103,7 +102,7 @@ class _WaiterPageState extends State<WaiterPage> {
                           //Image.network('${vImageUrl}/${snapshot.data![index]['image']}',width: imageWidth)
                         CircleAvatar(
                           radius: 40,
-                          foregroundImage: snapshot.data![index]['image'] == "" ? null : NetworkImage('${vImageUrl}/${snapshot.data![index]['image']}'),
+                          foregroundImage: snapshot.data![index]['image'] == "" ? null : NetworkImage('$vImageUrl/${snapshot.data![index]['image']}'),
                           // child: Text(snapshot.data![index]['name']
                           //     .toString()
                           //     .substring(0, 2)
