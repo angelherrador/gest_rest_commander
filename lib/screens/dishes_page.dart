@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import '../functions/functions.dart';
 
 
 class DishesPage extends StatefulWidget {
@@ -38,7 +39,6 @@ class _DishesPageState extends State<DishesPage> {
         list.addAll(redX);
         _streamController.add(redX);
       });
-      print(list);
     }
   }
 
@@ -62,12 +62,13 @@ class _DishesPageState extends State<DishesPage> {
     await readData(idFamily);
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.lightBlueAccent,
         appBar: AppBar(
           backgroundColor: Colors.blueAccent,
+          foregroundColor: Colors.white,
           title: Text(widget.nameFamily),
           centerTitle: true,
         ),
@@ -110,21 +111,33 @@ class _DishesPageState extends State<DishesPage> {
                                     ),
                                   ]),
                               child: InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              DishesPage(
-                                                idWaiter : widget.idWaiter,
-                                                idTable: widget.idTable,
-                                                idFamily: snapshot.data![index]['id'],
-                                                nameFamily: snapshot.data![index]['name'],
-                                              )));
-                                },
+                                onTap: () async {
+                                    await addCommandDetail(widget.idTable, snapshot.data![index]['id']);
+                                    final snackBar = SnackBar(
+                                      content: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                        children: [
+                                          Text('Añadido: ${snapshot.data![index]['name']}'),
+                                          IconButton(
+                                            icon: const Icon(
+                                              Icons.add_circle_outlined,
+                                              color: Colors.white,
+                                            ), onPressed: () {  },
+                                          ),
+                                        ],
+                                      ),
+                                      behavior: SnackBarBehavior.floating,
+                                      duration: const Duration(seconds: 1),
+                                      showCloseIcon: true,
+                                      width: 400,
+                                    );
+                                    if (!context.mounted) return;
+                                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                  },
                               ),
                             ),
-                            Text(snapshot.data![index]['name'],),
+                            Text(snapshot.data![index]['name'], style: const TextStyle(color: Colors.white,
+                              fontSize: 14, fontWeight: FontWeight.bold,)),
                           ],
                         );
                       },

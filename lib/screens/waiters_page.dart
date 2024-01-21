@@ -32,7 +32,7 @@ class _WaiterPageState extends State<WaiterPage> {
         list.addAll(redX);
         _streamController.add(redX);
       });
-      //print(list);
+      //debugPrint(list);
     }
   }
 

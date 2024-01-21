@@ -11,6 +11,7 @@ include('../connect.php');
    }
 
    echo json_encode($data);
+   $con->close();
 
    /*echo "<pre>";
    print_r ($data);

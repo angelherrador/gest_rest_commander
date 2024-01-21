@@ -58,8 +58,8 @@ class _RoomPageState extends State<RoomPage> {
 
   @override
   Widget build(BuildContext context) {
-    var imageWidth =
-        MediaQuery.of(context).size.width *0.25; //% del ancho de pantalla
+    // var imageWidth =
+    //     MediaQuery.of(context).size.width *0.25; //% del ancho de pantalla
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.blueAccent,
