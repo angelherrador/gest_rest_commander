@@ -38,6 +38,7 @@ class _TablePageState extends State<TablePage> {
     if (res.statusCode == 200){
       var redX = jsonDecode(res.body);
 
+      if (!context.mounted) return;
       setState(() {
         list.addAll(redX);
         _streamController.add(redX);
@@ -183,7 +184,7 @@ class _TablePageState extends State<TablePage> {
                               //     snapshot.data![index]['number'], snapshot.data![index]['id'],widget.idWaiter);
                             }
                             if (!context.mounted) return;
-                            await Navigator.push(
+                            var refresh = await Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
@@ -193,7 +194,9 @@ class _TablePageState extends State<TablePage> {
                                           ),
                                 )
                             );
-                            await getData(widget.idRoom);
+                            if (refresh == true) {
+                              await getData(widget.idRoom);
+                            }
                             //await readData(widget.idRoom); //refreshPage();
                           },
                         ),

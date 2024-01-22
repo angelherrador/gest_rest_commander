@@ -27,6 +27,7 @@ class _RoomPageState extends State<RoomPage> {
     if (res.statusCode == 200){
       var redX = jsonDecode(res.body);
 
+      if (!context.mounted) return;
       setState(() {
         list.addAll(redX);
         _streamController.add(redX);
@@ -43,6 +44,7 @@ class _RoomPageState extends State<RoomPage> {
     // TODO: implement initState
     super.initState();
 
+    if (!context.mounted) return;
     setState(() {
       _streamController = StreamController();
       _stream = _streamController.stream;

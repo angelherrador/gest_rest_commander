@@ -3,7 +3,9 @@
 error_reporting(0);
 include('../connect.php');
 
-   $sql = "SELECT * FROM `commandDetail` ORDER BY `id`";
+   $sql = "SELECT `commandDetail.*`,`dishes.`name`,`dishes`.`image`
+   FROM commandDetail left join dishes on commandDetail.idDish=dishes.id";
+
    $result = $con->query($sql);
 
    while($row = $result->fetch_assoc()){

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gest_rest/screens/room_page.dart';
+import 'command_page.dart';
 import 'dishes_page.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
@@ -230,12 +232,33 @@ class _FamilyPageState extends State<FamilyPage> {
         //     ),
         // ),
       CommonBottomNavigationBar(
-        currentIndex: 0, // Índice seleccionado para esta página
-        onTap: (index) {
+        currentIndex: 0,
+        onTap: (index) async {
           if(index==0){
-            //Navigator.popUntil(context, ModalRoute.withName('/room_page.dart'));
-            int count = 0;
-            Navigator.of(context).popUntil((_) => count++ >= 2);
+            // int count = 0;
+            // Navigator.of(context).popUntil((_) => count++ >= 2);
+            Navigator.of(context).pop(false);
+            Navigator.of(context).pop();
+
+            // Navigator.push(
+            //     context,
+            //     MaterialPageRoute(
+            //         builder: (context) =>
+            //             RoomPage(idWaiter : widget.idWaiter,)));
+          }else if(index==1){
+            Navigator.of(context).pop(true);
+          }else if(index==2){
+            await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      CommandPage(
+                        idWaiter : widget.idWaiter,
+                        idTable : widget.idTable,
+                      ),
+                )
+            );
+
           }
         },
       ),
@@ -263,15 +286,16 @@ Future<void> emptyTable(BuildContext context, idTable) async {
           TextButton(
             child: const Text('Sí'),
             onPressed: () async {
-              changeFreeTable(idTable,'0','1','0');
-              Navigator.of(context).pop();
+              await changeFreeTable(idTable,'0','1','0');
+              if (!context.mounted) return;
+              Navigator.of(context).pop(false);
               Navigator.of(context).pop();
             },
           ),
           TextButton(
             child: const Text('No'),
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.of(context).pop(true);
             },
           ),
         ],
