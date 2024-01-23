@@ -3,8 +3,14 @@
 error_reporting(0);
 include('../connect.php');
 
-   $sql = "SELECT `commandDetail.*`,`dishes.`name`,`dishes`.`image`
-   FROM commandDetail left join dishes on commandDetail.idDish=dishes.id";
+
+   $numberCommander = $_GET['idTable'] ?? 0;
+   $sql = "SELECT `commandDetail`.*,`dishes`.`name`,`dishes`.`image`,
+   `families`.`directory`
+   FROM `commandDetail` LEFT JOIN `dishes` on `commandDetail`.`idDish` = `dishes`.`id`
+   LEFT JOIN `families` ON `families`.`id` = `dishes`.`idFamily`
+   WHERE  `commandDetail`.`number` = '$numberCommander'";
+
 
    $result = $con->query($sql);
 

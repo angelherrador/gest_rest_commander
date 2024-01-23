@@ -63,6 +63,7 @@ class _WaiterPageState extends State<WaiterPage> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.blueAccent,
+          foregroundColor: Colors.white,
           title: const Text('Selección de camarero'),
           centerTitle: true,
           actions: [

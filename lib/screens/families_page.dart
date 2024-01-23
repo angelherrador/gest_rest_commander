@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gest_rest/screens/room_page.dart';
 import 'command_page.dart';
 import 'dishes_page.dart';
 import 'package:http/http.dart' as http;
@@ -126,6 +125,7 @@ class _FamilyPageState extends State<FamilyPage> {
         backgroundColor: Colors.blueAccent,
         foregroundColor: Colors.white,
         title: Text('Mesa ${widget.idTable}'),
+        centerTitle: true,
         actions: [
           IconButton(
             icon: const Icon(Icons.delete),
@@ -235,16 +235,8 @@ class _FamilyPageState extends State<FamilyPage> {
         currentIndex: 0,
         onTap: (index) async {
           if(index==0){
-            // int count = 0;
-            // Navigator.of(context).popUntil((_) => count++ >= 2);
             Navigator.of(context).pop(false);
             Navigator.of(context).pop();
-
-            // Navigator.push(
-            //     context,
-            //     MaterialPageRoute(
-            //         builder: (context) =>
-            //             RoomPage(idWaiter : widget.idWaiter,)));
           }else if(index==1){
             Navigator.of(context).pop(true);
           }else if(index==2){
@@ -258,7 +250,6 @@ class _FamilyPageState extends State<FamilyPage> {
                       ),
                 )
             );
-
           }
         },
       ),
@@ -289,13 +280,13 @@ Future<void> emptyTable(BuildContext context, idTable) async {
               await changeFreeTable(idTable,'0','1','0');
               if (!context.mounted) return;
               Navigator.of(context).pop(false);
-              Navigator.of(context).pop();
+              Navigator.of(context).pop(true);
             },
           ),
           TextButton(
             child: const Text('No'),
             onPressed: () {
-              Navigator.of(context).pop(true);
+              Navigator.of(context).pop();
             },
           ),
         ],

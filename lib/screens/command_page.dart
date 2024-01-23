@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
-import 'package:gest_rest/screens/tables_page.dart';
 import 'package:http/http.dart' as http;
 
 class CommandPage extends StatefulWidget {
@@ -17,11 +16,11 @@ class CommandPage extends StatefulWidget {
 class _CommandPageState extends State<CommandPage> {
 
   List list = [];
-  String vApiUrl = "https://herradormartinez.es/gestrest/api_gestrest/rooms";
-  String vImageUrl="https://herradormartinez.es/gestrest/images/rooms";
+  String vApiUrl = "https://herradormartinez.es/gestrest/api_gestrest/commander";
+  String vImageUrl="https://herradormartinez.es/gestrest/images/dishes";
 
-  Future readData() async {
-    var vFile="readData.php";
+  Future readData(idTable) async {
+    var vFile="readData.php?idTable=$idTable";
     var url = "$vApiUrl/$vFile";
     var res = await http.get(Uri.parse(url));
 
@@ -53,7 +52,7 @@ class _CommandPageState extends State<CommandPage> {
   }
 
   getData() async {
-    await readData();
+    await readData(widget.idTable);
   }
 
 
@@ -64,7 +63,8 @@ class _CommandPageState extends State<CommandPage> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.blueAccent,
-          title: Text('Comanda: ${widget.idTable}'),
+          foregroundColor: Colors.white,
+          title: Text('Mesa ${widget.idTable}'),
           centerTitle: true,
         ),
         body:
@@ -78,28 +78,21 @@ class _CommandPageState extends State<CommandPage> {
                     return ListTile(
                       title: Text(snapshot.data![index]['name'],style: const TextStyle(fontSize: 16),),
                       //subtitle: Text(snapshot.data![index]['image']),
-                      subtitle: const Text(" "),
+                      subtitle: Text(snapshot.data![index]['modifiers']),
                       leading: InkWell(
                         onTap: (){
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      TablePage(
-                                          idWaiter : widget.idWaiter,
-                                          idRoom: snapshot.data![index]['id']
-                                      )));
+
                         },
                         child:
                         Container(
-                          width: 120,
-                          height: 120,
+                          width: 60,
+                          height: 60,
                           padding: const EdgeInsets.all(20),
                           decoration: BoxDecoration(
                               color: Colors.grey,
                               borderRadius: BorderRadius.circular(10.0),
                               image:  DecorationImage(
-                                image: NetworkImage('$vImageUrl/${snapshot.data![index]['image']}'),
+                                image: NetworkImage('$vImageUrl/${snapshot.data![index]['directory']}/${snapshot.data![index]['image']}'),
                                 fit: BoxFit.cover,
                               ),
                               boxShadow: const [
@@ -110,7 +103,32 @@ class _CommandPageState extends State<CommandPage> {
                                 ),
                               ]),
                         ),
-                      ),);
+                      ),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          onPressed: (){
+                          },
+                          icon: const Icon(
+                            Icons.add_circle_outlined,
+                            color: Colors.blueAccent,
+                            size: 30,
+                          ),
+                        ),
+                        Text(snapshot.data![index]['quantity'],style: const TextStyle(fontSize: 16),),
+                        IconButton(
+                          onPressed: (){
+                          },
+                          icon: const Icon(
+                            Icons.remove_circle_outlined,
+                            color: Colors.redAccent,
+                            size: 30,
+                          ),
+                        ),
+                      ],
+                    ),
+                    );
                   });
             }else if(snapshot.hasError){
               return const Center(child: Text('Se ha producido un error. No hay datos disponibles !!!'));

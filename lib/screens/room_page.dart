@@ -65,7 +65,8 @@ class _RoomPageState extends State<RoomPage> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.blueAccent,
-          title: Text('Selección de Sala: ${widget.idWaiter}'),
+          foregroundColor: Colors.white,
+          title: const Text('Selección de Sala'),
           centerTitle: true,
         ),
         body:
@@ -77,7 +78,7 @@ class _RoomPageState extends State<RoomPage> {
                   itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
                     return ListTile(
-                      title: Text(snapshot.data![index]['name'],style: const TextStyle(fontSize: 16),),
+                      title: Text(snapshot.data![index]['name'],style: const TextStyle(fontSize: 26),),
                       //subtitle: Text(snapshot.data![index]['image']),
                       subtitle: const Text(" "),
                       leading: InkWell(

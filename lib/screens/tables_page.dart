@@ -62,48 +62,6 @@ class _TablePageState extends State<TablePage> {
       //print(redX);
       getData(widget.idRoom);
     }
-
-    // final snackBar = SnackBar(
-    //   content: Text('Cambio!: $tableNumber'),
-    //   behavior: SnackBarBehavior.floating,
-    //   duration: const Duration(seconds: 5),
-    //   showCloseIcon: true,
-    //   width: 400,
-    // );
-    // if (!context.mounted) return;
-    // ScaffoldMessenger.of(context).showSnackBar(snackBar);
-  }
-
-  Future addCommand(tableNumber,idTable,idWaiter) async{
-    var vFile="addCommand.php";
-    var url = "https://herradormartinez.es/gestrest/api_gestrest/commander/$vFile";
-    await http.post(Uri.parse(url), body: {
-      'tableNumber': tableNumber,
-      'idTable': idTable,
-      'idWaiter' : idWaiter,
-    });
-  }
-
-  Future readNumCommander() async {
-    var vFile="numCommander.php";
-    var url = "https://herradormartinez.es/gestrest/api_gestrest/commander/$vFile";
-    var res = await http.get(Uri.parse(url));
-
-    if (res.statusCode == 200){
-      var redX = jsonDecode(res.body);
-      setState(() {
-        listCommander.addAll(redX);
-        numCommander=listCommander[0];
-      });
-      //print(listCommander[0]);
-
-    }
-
-    // var snackBar = SnackBar(
-    //   content: Text('Comanda: $numCommander'),
-    // );
-    // if (!context.mounted) return;
-    // ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   late StreamController<List<dynamic>> _streamController;
@@ -132,7 +90,8 @@ class _TablePageState extends State<TablePage> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.blueAccent,
-          title: Text('Selección de mesa: ${widget.idWaiter} - ${widget.idRoom}'),
+          foregroundColor: Colors.white,
+          title: const Text('Selección de mesa'),
           centerTitle: true,
         ),
         body:
@@ -175,13 +134,10 @@ class _TablePageState extends State<TablePage> {
                         ),
                         child: InkWell(
                           onTap: () async {
-                            //await readNumCommander();
                             //occupied table
                             if (snapshot.data![index]['free'] == '1') {
                               await  changeFreeTable(
                                   snapshot.data![index]['number'], snapshot.data![index]['id'], '0', widget.idWaiter);
-                              // await addCommand(
-                              //     snapshot.data![index]['number'], snapshot.data![index]['id'],widget.idWaiter);
                             }
                             if (!context.mounted) return;
                             var refresh = await Navigator.push(
@@ -201,7 +157,6 @@ class _TablePageState extends State<TablePage> {
                           },
                         ),
                       ),
-                      //Text('${snapshot.data![index]['number']} / ${snapshot.data![index]['free']}',style: const TextStyle(fontSize: 25),),
                       Text('${snapshot.data![index]['number']}', style: const TextStyle(fontSize: 25),),
                     ],
                   );
