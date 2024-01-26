@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import '../functions/functions.dart';
+import 'command_page.dart';
 
 
 class DishesPage extends StatefulWidget {
@@ -151,6 +152,31 @@ class _DishesPageState extends State<DishesPage> {
             ),
           ),
         ],
+      ),
+      bottomNavigationBar:
+      CommonBottomNavigationBar(
+        currentIndex: 0,
+        onTap: (index) async {
+          if(index==0){
+            Navigator.of(context).pop(false);
+            Navigator.of(context).pop(false);
+            Navigator.of(context).pop();
+          }else if(index==1){
+            Navigator.of(context).pop(false);
+            Navigator.of(context).pop(true);
+          }else if(index==2){
+            await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      CommandPage(
+                        idWaiter : widget.idWaiter,
+                        idTable : widget.idTable,
+                      ),
+                )
+            );
+          }
+        },
       ),
     );
   }
