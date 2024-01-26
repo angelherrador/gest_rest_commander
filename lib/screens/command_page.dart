@@ -15,9 +15,12 @@ class CommandPage extends StatefulWidget {
 
 class _CommandPageState extends State<CommandPage> {
 
+  int vQuantity = 0;
   List list = [];
   String vApiUrl = "https://herradormartinez.es/gestrest/api_gestrest/commander";
   String vImageUrl="https://herradormartinez.es/gestrest/images/dishes";
+
+
 
   Future readData(idTable) async {
     var vFile="readData.php?idTable=$idTable";
@@ -32,6 +35,22 @@ class _CommandPageState extends State<CommandPage> {
         _streamController.add(redX);
       });
       //print(list);
+    }
+  }
+
+  Future updateQuantity(tableNumber,idDish,quantity) async{
+    var vFile="updateQuantity.php";
+    var url = "$vApiUrl/$vFile";
+    var res = await http.post(Uri.parse(url), body: {
+      'tableNumber': tableNumber,
+      'idDish': idDish,
+      'quantity': quantity,
+    });
+
+    if (res.statusCode == 200){
+      //var redX = jsonDecode(res.body);
+      //print(redX);
+      getData();
     }
   }
 
@@ -56,6 +75,7 @@ class _CommandPageState extends State<CommandPage> {
   }
 
 
+
   @override
   Widget build(BuildContext context) {
     // var imageWidth =
@@ -75,6 +95,12 @@ class _CommandPageState extends State<CommandPage> {
               return ListView.builder(
                   itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
+                    //vQuantity = int.parse(snapshot.data![index]['quantity']);
+                    // void updateData(int index, int newQuantity) {
+                    //   setState(() {
+                    //     snapshot.data![index]['quantity'] = newQuantity.toString();
+                    //   });
+                    // }
                     return ListTile(
                       title: Text(snapshot.data![index]['name'],style: const TextStyle(fontSize: 16),),
                       //subtitle: Text(snapshot.data![index]['image']),
@@ -108,7 +134,15 @@ class _CommandPageState extends State<CommandPage> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         IconButton(
-                          onPressed: (){
+                          onPressed: () async {
+                            vQuantity++;
+                            //await updateQuantity(widget.idTable, snapshot.data![index]['idDish'], vQuantity.toString());
+                            await updateQuantity(widget.idTable, snapshot.data![index]['idDish'], '1');
+                            await getData();
+
+                            // setState(() {
+                            //   updateData(index, vQuantity);
+                            // });
                           },
                           icon: const Icon(
                             Icons.add_circle_outlined,
@@ -116,9 +150,16 @@ class _CommandPageState extends State<CommandPage> {
                             size: 30,
                           ),
                         ),
+                        // Text(snapshot.data![index]['quantity'],style: const TextStyle(fontSize: 16),),
                         Text(snapshot.data![index]['quantity'],style: const TextStyle(fontSize: 16),),
                         IconButton(
-                          onPressed: (){
+                          onPressed: () async {
+                            vQuantity--;
+                            await updateQuantity(widget.idTable, snapshot.data![index]['idDish'], '-1');
+                            await getData();
+                            // setState(() {
+                            //   updateData(index, vQuantity);
+                            // });
                           },
                           icon: const Icon(
                             Icons.remove_circle_outlined,
