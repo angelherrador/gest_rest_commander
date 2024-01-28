@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 
+
+String vPrincipalUrl = 'https://herradormartinez.es/gestrest';
+String vApiUrlP = '$vPrincipalUrl/api_gestrest';
+String vApiUrlI = '$vPrincipalUrl/images';
+
 Future addCommandDetail(tableNumber,idDish) async{
-  String vApiUrl = "https://herradormartinez.es/gestrest/api_gestrest/commander";
+  String vApiUrl = '$vApiUrlP/commander';
   var vFile="addCommandDetail.php";
   var url = "$vApiUrl/$vFile";
   await http.post(Uri.parse(url), body: {

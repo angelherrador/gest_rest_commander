@@ -22,9 +22,9 @@ class _FamilyPageState extends State<FamilyPage> {
 
   List listFavorites = [];
   List listFamilies = [];
-  String vApiUrlFavorites = "https://herradormartinez.es/gestrest/api_gestrest/dishes";
-  String vImageUrl="https://herradormartinez.es/gestrest/images/dishes";
-  String vApiUrlFamilies = "https://herradormartinez.es/gestrest/api_gestrest/families";
+  String vApiUrlFavorites = '$vApiUrlP/dishes';
+  String vImageUrl='$vApiUrlI/dishes';
+  String vApiUrlFamilies = '$vApiUrlP/families';
 
   Future readDataFavorites() async {
     var vFile="readDataFavorites.php";
@@ -114,7 +114,8 @@ class _FamilyPageState extends State<FamilyPage> {
           }else if(snapshot.hasError){
             return const Center(child: Text('Se ha producido un error. No hay datos disponibles !!!'));
           }
-          return const Center(child: Text('Sin Favoritos!!'));
+          return const Center(child: CircularProgressIndicator());
+          //return const Center(child: Text('Sin Favoritos!!'));
         } //builder
       ),
     );
@@ -200,8 +201,7 @@ class _FamilyPageState extends State<FamilyPage> {
                 }else if(snapshot.hasError){
                   return const Center(child: Text('Se ha producido un error. No hay datos disponibles !!!'));
                 }
-                return const Center(child: Text("Sin datos!!!"));
-                //return const Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               }
             ),
           ),
@@ -355,7 +355,7 @@ Builder _buildFavorites(String label, String favoriteImage, idTable, idDish) {
 }
 
 Future changeFreeTable(tableNumber,idTable,freeValue,idWaiter) async{
-  String vApiUrl = "https://herradormartinez.es/gestrest/api_gestrest/tables";
+  String vApiUrl = '$vApiUrlP/tables';
   var vFile="changeFree.php";
   var url = "$vApiUrl/$vFile";
   await http.post(Uri.parse(url), body: {

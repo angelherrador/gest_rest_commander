@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:gest_rest/screens/onboarding_page.dart';
-import 'package:gest_rest/screens/room_page.dart';
+import 'onboarding_page.dart';
+import 'room_page.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../functions/functions.dart';
+import 'package:onscreen_num_keyboard/onscreen_num_keyboard.dart';
 
 class WaiterPage extends StatefulWidget {
    const WaiterPage({super.key});
@@ -15,9 +17,11 @@ class WaiterPage extends StatefulWidget {
 
 class _WaiterPageState extends State<WaiterPage> {
 
+  String password="";
+
   List list = [];
-  String vApiUrl = "https://herradormartinez.es/gestrest/api_gestrest/waiters";
-  String vImageUrl="https://herradormartinez.es/gestrest/images/waiters";
+  String vApiUrl = '$vApiUrlP/waiters';
+  String vImageUrl='$vApiUrlI/waiters';
 
 
   Future readData() async {
@@ -32,7 +36,7 @@ class _WaiterPageState extends State<WaiterPage> {
         list.addAll(redX);
         _streamController.add(redX);
       });
-      //debugPrint(list);
+      //print(list);
     }
   }
 
@@ -56,6 +60,45 @@ class _WaiterPageState extends State<WaiterPage> {
     await readData();
   }
 
+  onKeyboardTap(String value) {
+    setState(() {
+      password = password + value;
+    });
+  }
+
+  Future checkPassWord(idWaiter, vPassword) async{
+    String vApiUrl = '$vApiUrlP/waiters';
+    var vFile="checkPassWord.php";
+    var url = "$vApiUrl/$vFile";
+    var res = await http.post(Uri.parse(url), body: {
+      'idWaiter': idWaiter,
+      'vPassword': password,
+    });
+
+    setState(() {
+      password = '';
+    });
+
+    if (res.statusCode == 200) {
+      if (!context.mounted) return;
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  RoomPage(idWaiter : idWaiter,)));
+    } else {
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Credenciales incorrectas !!!'),
+          behavior: SnackBarBehavior.floating,
+          duration:  Duration(seconds: 2),
+          showCloseIcon: true,
+          width: 400,
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,58 +109,118 @@ class _WaiterPageState extends State<WaiterPage> {
           foregroundColor: Colors.white,
           title: const Text('Selección de camarero'),
           centerTitle: true,
-          actions: [
-            IconButton(
-              onPressed: () async {
-                final SharedPreferences prefs = await SharedPreferences.getInstance();
-                await prefs.setBool('showHome', false);
-                if (!context.mounted) return;
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => const OnBoardingPage()),
-                );
-              },
-              icon: const Icon(Icons.logout),)
-          ],
+        ),
+        drawer: Drawer(
+          child: ListView(
+            children: [
+              DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.lightBlueAccent,
+                  image: DecorationImage(
+                    image: NetworkImage('$vApiUrlI/logos/logo1.jpg'),
+                    fit: BoxFit.fill,
+                  ),
+                ),
+                child: const Stack(
+                  children: [
+                    Positioned(
+                      bottom: 8.0,
+                      left: 4.0,
+                      child: Text(
+                        "App Making.co",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              ListTile(
+                leading: const Icon(Icons.book),
+                title: const Text("Tutorial"),
+                onTap: ()
+                  async {
+                    Navigator.pop(context);
+                    final SharedPreferences prefs = await SharedPreferences.getInstance();
+                    await prefs.setBool('showHome', false);
+                    if (!context.mounted) return;
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => const OnBoardingPage()),
+                    );
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.dining_sharp),
+                title: const Text("Platos"),
+                onTap: () {},
+              ),
+              ListTile(
+                leading: const Icon(Icons.align_vertical_bottom_outlined),
+                title: const Text("Acerca de..."),
+                onTap: () {},
+              )
+            ],
+          ),
         ),
         body:
-        StreamBuilder<List<dynamic>>(
-          stream: _stream,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return ListView.builder(
-                  itemCount: snapshot.data!.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
+        Column(
+          children: [
+            Expanded(
+              child: StreamBuilder<List<dynamic>>(
+                stream: _stream,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return ListView.builder(
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (context, index) {
+                          return ListTile(
 
-                      title: Text(snapshot.data![index]['name'],style: const TextStyle(fontSize: 16),),
-                      subtitle: const Text(" "),
-                      leading: InkWell(
-                          onTap: (){
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        RoomPage(idWaiter : snapshot.data![index]['id'],)));
-                          },
-                          child:
-                          //Image.network('${vImageUrl}/${snapshot.data![index]['image']}',width: imageWidth)
-                        CircleAvatar(
-                          radius: 40,
-                          foregroundImage: snapshot.data![index]['image'] == "" ? null : NetworkImage('$vImageUrl/${snapshot.data![index]['image']}'),
-                          // child: Text(snapshot.data![index]['name']
-                          //     .toString()
-                          //     .substring(0, 2)
-                          //     .toUpperCase()),
-                        ),
-                      ),
-                    );
+                            title: Text(snapshot.data![index]['name'],style: const TextStyle(fontSize: 16),),
+                            subtitle: const Text(" "),
+                            leading: InkWell(
+                                onTap: (){
+                                  checkPassWord(snapshot.data![index]['id'], password);
+                                },
+                                child:
+                              CircleAvatar(
+                                radius: 40,
+                                foregroundImage: snapshot.data![index]['image'] == "" ? null : NetworkImage('$vImageUrl/${snapshot.data![index]['image']}'),
+                              ),
+                            ),
+                          );
+                        });
+                  }else if(snapshot.hasError){
+                    return const Center(child: Text('Se ha producido un error. No hay datos disponibles !!!'));
+                  }
+                  //return const Center(child: Text("Server Error!!!"));
+                  return const Center(child: CircularProgressIndicator());
+                }, // builder:
+              ),
+            ),
+            Text(password),
+            NumericKeyboard(
+                onKeyboardTap: onKeyboardTap,
+                textStyle: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 28,
+                ),
+                rightButtonFn: () {
+                  if (password.isEmpty) return;
+                  setState(() {
+                    password = password.substring(0, password.length - 1);
                   });
-            }else if(snapshot.hasError){
-              return const Center(child: Text('Se ha producido un error. No hay datos disponibles !!!'));
-            }
-            //return const Center(child: Text("Server Error!!!"));
-            return const Center(child: CircularProgressIndicator());
-          }, // builder:
+                },
+                rightButtonLongPressFn: () {
+                  if (password.isEmpty) return;
+                  setState(() {
+                    password = '';
+                  });
+                },
+                rightIcon: const Icon(
+                  Icons.backspace_outlined,
+                  color: Colors.blueGrey,
+                ),
+                mainAxisAlignment: MainAxisAlignment.spaceBetween),
+          ],
         )
     );
   }

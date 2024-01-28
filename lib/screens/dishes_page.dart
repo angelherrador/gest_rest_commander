@@ -25,8 +25,8 @@ class DishesPage extends StatefulWidget {
 
 class _DishesPageState extends State<DishesPage> {
   List list = [];
-  String vApiUrl = "https://herradormartinez.es/gestrest/api_gestrest/dishes";
-  String vImageUrl="https://herradormartinez.es/gestrest/images/dishes";
+  String vApiUrl = '$vApiUrlP/dishes';
+  String vImageUrl='$vApiUrlI/dishes';
 
   Future readData(idFamily) async {
     var vFile="readData.php?idFamily=$idFamily";

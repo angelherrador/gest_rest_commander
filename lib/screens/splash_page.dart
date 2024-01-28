@@ -1,10 +1,9 @@
-//import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:gest_rest/screens/waiters_page.dart';
+import 'waiters_page.dart';
 import 'onboarding_page.dart';
-//import 'package:lottie/lottie.dart';
-//import 'package:page_transition/page_transition.dart';
 import 'package:rive/rive.dart';
+import '../functions/functions.dart';
+
 
 class SplashScreen extends StatefulWidget {
   final bool showHome;
@@ -15,6 +14,8 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  String vApiUrl ='$vApiUrlI/logos';
+
   @override
   void initState(){
     super.initState();
@@ -30,10 +31,10 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
         child: RiveAnimation.network(
-          'https://herradormartinez.es/gestrest/images/logos/splash_logo.riv',
+          '$vApiUrl/splash_logo.riv',
           //animations: ['blink','5+'],
           //artBoard(''),
         ),
@@ -61,7 +62,7 @@ class _SplashScreenState extends State<SplashScreen> {
 //   return const Scaffold(
 //     body: Center(
 //       child: RiveAnimation.network(
-//         'https://herradormartinez.es/gestrest/logos/splash_logo.riv',
+//         'https://url/logos/splash_logo.riv',
 //         //animations: ['blink','5+'],
 //         //artBoard(''),
 //       ),

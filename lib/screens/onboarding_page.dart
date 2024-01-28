@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gest_rest/screens/waiters_page.dart';
+import 'waiters_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import '../functions/functions.dart';
 
 class OnBoardingPage extends StatefulWidget {
   const OnBoardingPage({super.key});
@@ -22,7 +23,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
 
   bool isLastPage = false;
   int pageNumber = 1;
-  String vImageUrl="https://herradormartinez.es/gestrest/images/logos";
+  String vImageUrl='$vApiUrlI/logos';
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +44,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                       color: Colors.red,
                       child: Center(child: Text('Pág $pageNumber',style: const TextStyle(fontSize: 40, color: Colors.white))),
                     ),
-                    Image.network('${vImageUrl}/logo1.JPG'),
+                    Image.network('$vImageUrl/logo1.jpg'),
                     //const Image(image: AssetImage('assets/logos/logo1.JPG')),
                     Expanded(
                       child: Container(
@@ -59,7 +60,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                       color: Colors.blue,
                       child: Center(child: Text('Pág $pageNumber',style: const TextStyle(fontSize: 40, color: Colors.white))),
                     ),
-                    Image.network('${vImageUrl}/logo2.JPG'),
+                    Image.network('$vImageUrl/logo2.JPG'),
                     //const Image(image: AssetImage('assets/logos/logo1.JPG')),
                     Expanded(
                       child: Container(
@@ -75,7 +76,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                       color: Colors.green,
                       child: Center(child: Text('Pág $pageNumber',style: const TextStyle(fontSize: 40, color: Colors.white))),
                     ),
-                    Image.network('${vImageUrl}/logo3.JPG'),
+                    Image.network('$vImageUrl/logo3.JPG'),
                     //const Image(image: AssetImage('assets/logos/logo1.JPG')),
                     Expanded(
                       child: Container(
@@ -91,7 +92,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                       color: Colors.orange,
                       child: Center(child: Text('Pág $pageNumber',style: const TextStyle(fontSize: 40, color: Colors.white))),
                     ),
-                    Image.network('${vImageUrl}/logo4.JPG',),
+                    Image.network('$vImageUrl/logo4.JPG',),
                     //const Image(image: AssetImage('assets/logos/logo1.JPG')),
                     Expanded(
                       child: Container(

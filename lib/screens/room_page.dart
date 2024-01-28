@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:gest_rest/screens/tables_page.dart';
+import '../functions/functions.dart';
+import 'tables_page.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
@@ -16,8 +17,8 @@ class RoomPage extends StatefulWidget {
 class _RoomPageState extends State<RoomPage> {
 
   List list = [];
-  String vApiUrl = "https://herradormartinez.es/gestrest/api_gestrest/rooms";
-  String vImageUrl="https://herradormartinez.es/gestrest/images/rooms";
+  String vApiUrl = "$vApiUrlP/rooms";
+  String vImageUrl="$vApiUrlI/rooms";
 
   Future readData() async {
     var vFile="readData.php";

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:gest_rest/screens/families_page.dart';
+import '../functions/functions.dart';
+import 'families_page.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
@@ -26,8 +27,8 @@ class _TablePageState extends State<TablePage> {
 
   List listCommander = [];
   List list = [];
-  String vApiUrl = "https://herradormartinez.es/gestrest/api_gestrest/tables";
-  String vImageUrl="https://herradormartinez.es/gestrest/images/tables";
+  String vApiUrl = '$vApiUrlP/tables';
+  String vImageUrl='$vApiUrlI/tables';
   late String numCommander;
 
   Future readData(vRoom) async {

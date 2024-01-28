@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../functions/functions.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -17,8 +18,8 @@ class _CommandPageState extends State<CommandPage> {
 
   int vQuantity = 0;
   List list = [];
-  String vApiUrl = "https://herradormartinez.es/gestrest/api_gestrest/commander";
-  String vImageUrl="https://herradormartinez.es/gestrest/images/dishes";
+  String vApiUrl = '$vApiUrlP/commander';
+  String vImageUrl='$vApiUrlI/dishes';
 
 
 
@@ -174,8 +175,8 @@ class _CommandPageState extends State<CommandPage> {
             }else if(snapshot.hasError){
               return const Center(child: Text('Se ha producido un error. No hay datos disponibles !!!'));
             }
-            //return const Center(child: Text("Server Error!!!"));
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: Text("Sin comanda añadida!!!"));
+            //return const Center(child: CircularProgressIndicator());
           }, // builder:
         )
     );
