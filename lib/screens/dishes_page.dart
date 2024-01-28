@@ -101,7 +101,10 @@ class _DishesPageState extends State<DishesPage> {
                                   color: Colors.grey,
                                   borderRadius: BorderRadius.circular(10.0),
                                   image:  DecorationImage(
-                                    image: NetworkImage('$vImageUrl/${snapshot.data![index]['directory']}/${snapshot.data![index]['image']}'),
+                                    image: snapshot.data![index]['image'] != ""
+                                        ? NetworkImage('$vImageUrl/${snapshot.data![index]['directory']}/${snapshot.data![index]['image']}')
+                                        : NetworkImage('$vImageUrl/no-photo.png'),
+                                    //image: NetworkImage('$vImageUrl/${snapshot.data![index]['directory']}/${snapshot.data![index]['image']}'),
                                     fit: BoxFit.cover,
                                   ),
                                   boxShadow: const [
@@ -137,8 +140,12 @@ class _DishesPageState extends State<DishesPage> {
                                   },
                               ),
                             ),
+                            // const SizedBox(height: 8),
                             Text(snapshot.data![index]['name'], style: const TextStyle(color: Colors.white,
-                              fontSize: 14, fontWeight: FontWeight.bold,)),
+                              fontSize: 14, fontWeight: FontWeight.bold,),
+                              // overflow: TextOverflow.ellipsis, // Truncar el texto si es demasiado largo
+                              // maxLines: 2, // Limitar el texto a dos líneas
+                            ),
                           ],
                         );
                       },

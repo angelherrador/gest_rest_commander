@@ -96,19 +96,12 @@ class _CommandPageState extends State<CommandPage> {
               return ListView.builder(
                   itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
-                    //vQuantity = int.parse(snapshot.data![index]['quantity']);
-                    // void updateData(int index, int newQuantity) {
-                    //   setState(() {
-                    //     snapshot.data![index]['quantity'] = newQuantity.toString();
-                    //   });
-                    // }
                     return ListTile(
                       title: Text(snapshot.data![index]['name'],style: const TextStyle(fontSize: 16),),
                       //subtitle: Text(snapshot.data![index]['image']),
                       subtitle: Text(snapshot.data![index]['modifiers']),
                       leading: InkWell(
                         onTap: (){
-
                         },
                         child:
                         Container(
@@ -131,45 +124,45 @@ class _CommandPageState extends State<CommandPage> {
                               ]),
                         ),
                       ),
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        IconButton(
-                          onPressed: () async {
-                            vQuantity++;
-                            //await updateQuantity(widget.idTable, snapshot.data![index]['idDish'], vQuantity.toString());
-                            await updateQuantity(widget.idTable, snapshot.data![index]['idDish'], '1');
-                            await getData();
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            onPressed: () async {
+                              vQuantity++;
+                              //await updateQuantity(widget.idTable, snapshot.data![index]['idDish'], vQuantity.toString());
+                              await updateQuantity(widget.idTable, snapshot.data![index]['idDish'], '1');
+                              await getData();
 
-                            // setState(() {
-                            //   updateData(index, vQuantity);
-                            // });
-                          },
-                          icon: const Icon(
-                            Icons.add_circle_outlined,
-                            color: Colors.blueAccent,
-                            size: 30,
+                              // setState(() {
+                              //   updateData(index, vQuantity);
+                              // });
+                            },
+                            icon: const Icon(
+                              Icons.add_circle_outlined,
+                              color: Colors.blueAccent,
+                              size: 30,
+                            ),
                           ),
-                        ),
-                        // Text(snapshot.data![index]['quantity'],style: const TextStyle(fontSize: 16),),
-                        Text(snapshot.data![index]['quantity'],style: const TextStyle(fontSize: 16),),
-                        IconButton(
-                          onPressed: () async {
-                            vQuantity--;
-                            await updateQuantity(widget.idTable, snapshot.data![index]['idDish'], '-1');
-                            await getData();
-                            // setState(() {
-                            //   updateData(index, vQuantity);
-                            // });
-                          },
-                          icon: const Icon(
-                            Icons.remove_circle_outlined,
-                            color: Colors.redAccent,
-                            size: 30,
+                          // Text(snapshot.data![index]['quantity'],style: const TextStyle(fontSize: 16),),
+                          Text(snapshot.data![index]['quantity'],style: const TextStyle(fontSize: 16),),
+                          IconButton(
+                            onPressed: () async {
+                              vQuantity--;
+                              await updateQuantity(widget.idTable, snapshot.data![index]['idDish'], '-1');
+                              await getData();
+                              // setState(() {
+                              //   updateData(index, vQuantity);
+                              // });
+                            },
+                            icon: const Icon(
+                              Icons.remove_circle_outlined,
+                              color: Colors.redAccent,
+                              size: 30,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
+                        ],
+                      ),
                     );
                   });
             }else if(snapshot.hasError){

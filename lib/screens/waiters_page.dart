@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../functions/functions.dart';
 import 'package:onscreen_num_keyboard/onscreen_num_keyboard.dart';
+import 'dishes_crud.dart';
 
 class WaiterPage extends StatefulWidget {
    const WaiterPage({super.key});
@@ -18,6 +19,7 @@ class WaiterPage extends StatefulWidget {
 class _WaiterPageState extends State<WaiterPage> {
 
   String password="";
+  String passMask="";
 
   List list = [];
   String vApiUrl = '$vApiUrlP/waiters';
@@ -63,6 +65,7 @@ class _WaiterPageState extends State<WaiterPage> {
   onKeyboardTap(String value) {
     setState(() {
       password = password + value;
+      passMask = '$passMask' + '*';
     });
   }
 
@@ -77,6 +80,7 @@ class _WaiterPageState extends State<WaiterPage> {
 
     setState(() {
       password = '';
+      passMask = '';
     });
 
     if (res.statusCode == 200) {
@@ -88,15 +92,7 @@ class _WaiterPageState extends State<WaiterPage> {
                   RoomPage(idWaiter : idWaiter,)));
     } else {
       if (!context.mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Credenciales incorrectas !!!'),
-          behavior: SnackBarBehavior.floating,
-          duration:  Duration(seconds: 2),
-          showCloseIcon: true,
-          width: 400,
-        ),
-      );
+      PrettySnackBar.show(context, 'Contraseña no válida!!!');
     }
   }
 
@@ -127,7 +123,7 @@ class _WaiterPageState extends State<WaiterPage> {
                       bottom: 8.0,
                       left: 4.0,
                       child: Text(
-                        "App Making.co",
+                        "Delicius Food",
                         style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
                     )
@@ -151,7 +147,14 @@ class _WaiterPageState extends State<WaiterPage> {
               ListTile(
                 leading: const Icon(Icons.dining_sharp),
                 title: const Text("Platos"),
-                onTap: () {},
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              const Dishes()));
+                },
               ),
               ListTile(
                 leading: const Icon(Icons.align_vertical_bottom_outlined),
@@ -196,7 +199,8 @@ class _WaiterPageState extends State<WaiterPage> {
                 }, // builder:
               ),
             ),
-            Text(password),
+            Text(passMask),
+            const Text('Teclea password y clica en tu avatar'),
             NumericKeyboard(
                 onKeyboardTap: onKeyboardTap,
                 textStyle: const TextStyle(
@@ -207,12 +211,14 @@ class _WaiterPageState extends State<WaiterPage> {
                   if (password.isEmpty) return;
                   setState(() {
                     password = password.substring(0, password.length - 1);
+                    passMask = passMask.substring(0, passMask.length - 1);
                   });
                 },
                 rightButtonLongPressFn: () {
                   if (password.isEmpty) return;
                   setState(() {
                     password = '';
+                    passMask = '';
                   });
                 },
                 rightIcon: const Icon(

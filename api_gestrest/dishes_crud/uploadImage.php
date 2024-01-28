@@ -5,13 +5,13 @@
 
     $id = $_POST['id'];
     $image = $_FILES['img']['name'];
-    $upload = "../../waiters/".$image;
+    $upload = "../../images/dishes/fogones/".$image;
     
     $tem_name = $_FILES['img']['tmp_name'];
 
     move_uploaded_file($tem_name, $upload);
 
-    $sql = "UPDATE `waiters` SET `image` = '$image' WHERE `id` = '$id'";
+    $sql = "UPDATE `dishes` SET `image` = '$image' WHERE `id` = '$id'";
     $result = $con->query($sql);   
 
     if($result){
