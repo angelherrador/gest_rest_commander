@@ -58,8 +58,8 @@ class _DishesState extends State<Dishes> {
       'name': vName.text,
     });
     if(res.statusCode == 200){
-      var redX = jsonDecode(res.body);
-      print(redX);
+      //var redX = jsonDecode(res.body);
+      //print(redX);
       await readData();
       updateName(vName.text);
     }
@@ -108,6 +108,20 @@ class _DishesState extends State<Dishes> {
 
   }
 
+  Future changeFavorite(idDish) async{
+    var vFile="changeFavorite.php";
+    var url = "$vApiUrl/$vFile";
+    var res = await http.post(Uri.parse(url), body: {
+      'idDish': idDish,
+    });
+
+    if (res.statusCode == 200){
+      //var redX = jsonDecode(res.body);
+      //print(redX);
+      await readData();
+    }
+  }
+
   late StreamController<List<dynamic>> _streamController;
   late Stream<List<dynamic>> _stream;
 
@@ -136,7 +150,7 @@ class _DishesState extends State<Dishes> {
 
   void updateName(String newName) {
     setState(() {
-      vName.text = newName;
+      vName.text = '';
     });
   }
 
@@ -175,10 +189,9 @@ class _DishesState extends State<Dishes> {
                           ElevatedButton(
                               onPressed: () async {
                                 //if (vName.text.length >=1) {
-                                // if (vName.text.isNotEmpty) {
-                                //   await addData();
-                                // }
-                                await addData();
+                                if (vName.text.isNotEmpty) {
+                                  await addData();
+                                }
                                 if (!context.mounted) return;
                                 Navigator.pop(context);
                               },
@@ -325,7 +338,7 @@ class _DishesState extends State<Dishes> {
                         ),
                       ),
                       trailing: SizedBox(
-                        width: 100,
+                        width: 150,
                         child: Row(
                             children: [
                               IconButton(onPressed: () {
@@ -333,13 +346,20 @@ class _DishesState extends State<Dishes> {
                               }, icon: const Icon(
                                   Icons.edit, color: Colors.teal)),
                               IconButton(onPressed: () {
-                                if (snapshot.data![index]['id'] == '11'){
+                                if (snapshot.data![index]['idFamily'] == '11'){
                                   deleteData(snapshot.data![index]['id']);
                                 }else {
                                   PrettySnackBar.show(context, 'Sólo se pueden eliminar platos de fogones!!!');
                                 }
                               }, icon: const Icon(
-                                  Icons.delete, color: Colors.redAccent)),
+                                  Icons.delete, color: Colors.black)),
+                              IconButton(onPressed: () async {
+                                await changeFavorite(snapshot.data![index]['id']);
+                              }, icon:
+                                    snapshot.data![index]['favorite'] == '0'
+                                    ? const Icon(Icons.favorite_border, color: Colors.red)
+                                    : const Icon(Icons.favorite, color: Colors.red)
+                              ),
                             ]
                         ),
                       ),

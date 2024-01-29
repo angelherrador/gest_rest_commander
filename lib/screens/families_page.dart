@@ -208,51 +208,28 @@ class _FamilyPageState extends State<FamilyPage> {
         ],
       ),
       bottomNavigationBar:
-        // Container(
-        //     height: 233,
-        //     decoration: const BoxDecoration(color: Colors.indigo),
-        //     child: Padding(
-        //       padding: const EdgeInsets.all(10.0),
-        //       child: Column(
-        //         children: [
-        //           Row(
-        //             children: [
-        //               Text(
-        //                 'ültimo plato: ',
-        //                 style: GoogleFonts.actor(
-        //                     fontSize: 20,
-        //                     color: Colors.white,
-        //                     fontWeight: FontWeight.w700),
-        //               ),
-        //               Text('$cant')
-        //             ],
-        //           ),
-        //         ],
-        //       ),
-        //     ),
-        // ),
-      CommonBottomNavigationBar(
-        currentIndex: 0,
-        onTap: (index) async {
-          if(index==0){
-            Navigator.of(context).pop(false);
-            Navigator.of(context).pop();
-          }else if(index==1){
-            Navigator.of(context).pop(true);
-          }else if(index==2){
-            await Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      CommandPage(
-                        idWaiter : widget.idWaiter,
-                        idTable : widget.idTable,
-                      ),
-                )
-            );
-          }
-        },
-      ),
+        CommonBottomNavigationBar(
+          currentIndex: 0,
+          onTap: (index) async {
+            if(index==0){
+              Navigator.of(context).pop(false);
+              Navigator.of(context).pop();
+            }else if(index==1){
+              Navigator.of(context).pop(true);
+            }else if(index==2){
+              await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        CommandPage(
+                          idWaiter : widget.idWaiter,
+                          idTable : widget.idTable,
+                        ),
+                  )
+              );
+            }
+          },
+        ),
     );
   }
 }
@@ -321,33 +298,22 @@ Builder _buildFavorites(String label, String favoriteImage, idTable, idDish) {
       child: InkWell(
         onTap: ()  async {
           await addCommandDetail(idTable, idDish);
-          final snackBar = SnackBar(
-            content: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text('Añadido: $label'),
-                IconButton(
-                  onPressed: (){
-                  },
-                  icon: const Icon(
-                    Icons.add_circle_outlined,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
-            behavior: SnackBarBehavior.floating,
-            duration: const Duration(seconds: 1),
-            showCloseIcon: true,
-            width: 400,
-            // action: SnackBarAction(
-            //   label: '+',
-            //   onPressed: () {
-            //     // Some code to undo the change.
-            //   },),
-          );
+          // final snackBar = SnackBar(
+          //   content: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //     children: [
+          //       Text('Añadido: $label'),
+          //     ],
+          //   ),
+          //   behavior: SnackBarBehavior.floating,
+          //   duration: const Duration(seconds: 1),
+          //   showCloseIcon: true,
+          //   width: 400,
+          // );
+          // if (!context.mounted) return;
+          // ScaffoldMessenger.of(context).showSnackBar(snackBar);
           if (!context.mounted) return;
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          PrettySnackBar.show(context, 'Añadido: $label');
         },
       ),
     );

@@ -5,8 +5,7 @@ include('../connect.php');
 
    $sql = "SELECT `dishes`.*, `families`.`directory`,`families`.`id` as `idFamily`,`families`.`name` as `familyName`
    FROM `dishes` LEFT JOIN `families` ON `families`.`id` = `dishes`.`idFamily`
-   WHERE `dishes`.`idFamily` = '11'
-   ORDER BY `dishes`.`idFamily`, `dishes`.`name`";
+   ORDER BY `dishes`.`idFamily` DESC, `dishes`.`name`";
    $result = $con->query($sql);
 
    while($row = $result->fetch_assoc()){

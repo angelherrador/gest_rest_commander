@@ -22,7 +22,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   }
 
   bool isLastPage = false;
-  int pageNumber = 1;
+  //int pageNumber = 1;
   String vImageUrl='$vApiUrlI/logos';
 
   @override
@@ -34,22 +34,24 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           child: PageView(
               controller: controller,
               onPageChanged: (index) {
-                setState(() => isLastPage = index == 3);
-                pageNumber = index++;
+                setState(() => isLastPage = index == 6);
               },
               children: [
                 Column(
                   children: [
                     Container(
-                      color: Colors.red,
-                      child: Center(child: Text('Pág $pageNumber',style: const TextStyle(fontSize: 40, color: Colors.white))),
+                      color: Colors.blue,
+                      child: const Center(child: Text('Bienvenido!',style: TextStyle(fontSize: 30, color: Colors.white))),
                     ),
+                    const SizedBox(height: 10,),
                     Image.network('$vImageUrl/logo1.jpg'),
-                    //const Image(image: AssetImage('assets/logos/logo1.JPG')),
-                    Expanded(
-                      child: Container(
-                        color: Colors.red,
-                        child: const Center(child: Text('Aquí vamos a explicar cositas',style: TextStyle(fontSize: 20, color: Colors.white))),
+                    const Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Center(child: Text('Dinner Resto es una APP para poder gestionar '
+                            'las comandas de su restaurante sin usar papel y bolígrafo. Se acabaron los errores de '
+                            'interpretación, de lectura y similares. Clique en Siguiente y vaya avanzando por las pantallas de este'
+                            ' tutorial y verá que sencillo y que rápido se podrá familiarizar en el uso de nueva APP.',style: TextStyle(fontSize: 16, color: Colors.black))),
                       ),
                     ),
                   ],
@@ -58,14 +60,20 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   children: [
                     Container(
                       color: Colors.blue,
-                      child: Center(child: Text('Pág $pageNumber',style: const TextStyle(fontSize: 40, color: Colors.white))),
+                      child: const Center(child: Text('Camarero y menú',style: TextStyle(fontSize: 30, color: Colors.white))),
                     ),
-                    Image.network('$vImageUrl/logo2.JPG'),
-                    //const Image(image: AssetImage('assets/logos/logo1.JPG')),
-                    Expanded(
-                      child: Container(
-                        color: Colors.blue,
-                        child: const Center(child: Text('Aquí vamos a explicar cositas',style: TextStyle(fontSize: 20, color: Colors.white))),
+                    const SizedBox(height: 10,),
+                    SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.5, // 50% del ancho de la pantalla
+                        child: const Image(image: AssetImage('assets/tutorial/camareros.jpg'))
+                    ),
+                    const Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Center(child: Text('Esta pantalla permite la selección de camarero una vez introducida'
+                            ' la correspondiente contraseña y, a la vez, contiene un menú que permite'
+                            ' visionar este tutorial todas las veces que desees. Otra opción importante del menú es '
+                            'la gestión de platos, donde podemos definir favoritos, crear nuevos, editar, tomar nuevas imágenes.',style: TextStyle(fontSize: 14, color: Colors.black))),
                       ),
                     ),
                   ],
@@ -73,15 +81,19 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                 Column(
                   children: [
                     Container(
-                      color: Colors.green,
-                      child: Center(child: Text('Pág $pageNumber',style: const TextStyle(fontSize: 40, color: Colors.white))),
+                      color: Colors.blue,
+                      child: const Center(child: Text('Salas y mesas',style: TextStyle(fontSize: 30, color: Colors.white))),
                     ),
-                    Image.network('$vImageUrl/logo3.JPG'),
-                    //const Image(image: AssetImage('assets/logos/logo1.JPG')),
-                    Expanded(
-                      child: Container(
-                        color: Colors.green,
-                        child: const Center(child: Text('Aquí vamos a explicar cositas',style: TextStyle(fontSize: 20, color: Colors.white))),
+                    const SizedBox(height: 10,),
+                    SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.75, // 50% del ancho de la pantalla
+                        child: const Image(image: AssetImage('assets/tutorial/sala_mesa.jpg'))
+                    ),
+                    const Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Center(child: Text('Selecciona la Sala  y a continuación la mesa. Las mesas cambian de color para indicar el '
+                            'estado, libres /ocupadas.',style: TextStyle(fontSize: 18, color: Colors.black))),
                       ),
                     ),
                   ],
@@ -89,15 +101,84 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                 Column(
                   children: [
                     Container(
-                      color: Colors.orange,
-                      child: Center(child: Text('Pág $pageNumber',style: const TextStyle(fontSize: 40, color: Colors.white))),
+                      color: Colors.blue,
+                      child: const Center(child: Text('Familias y Favoritos',style: TextStyle(fontSize: 30, color: Colors.white))),
                     ),
-                    Image.network('$vImageUrl/logo4.JPG',),
-                    //const Image(image: AssetImage('assets/logos/logo1.JPG')),
-                    Expanded(
-                      child: Container(
-                        color: Colors.orange,
-                        child: const Center(child: Text('Aquí vamos a explicar cositas',style: TextStyle(fontSize: 20, color: Colors.white))),
+                    const SizedBox(height: 10,),
+                    SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.5, // 50% del ancho de la pantalla
+                        child: const Image(image: AssetImage('assets/tutorial/familias.jpg'))
+                    ),
+                    const Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Center(child: Text('La primera fila contiene los platos '
+                            'favoritos indicados en Gestión de platos. En la parte central tenemos '
+                            'las familias, que mostrarán los platos, y a continuación 3 accesos a '
+                            'los destinos indicados: Salas, Mesas, Comanda. ',style: TextStyle(fontSize: 18, color: Colors.black))),
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Container(
+                      color: Colors.blue,
+                      child: const Center(child: Text('Platos',style: TextStyle(fontSize: 30, color: Colors.white))),
+                    ),
+                    const SizedBox(height: 10,),
+                    SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.5, // 50% del ancho de la pantalla
+                        child: const Image(image: AssetImage('assets/tutorial/platos.jpg'))
+                    ),
+                    const Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Center(child: Text('Se muestran los platos correspondientes a la familia seleccionada '
+                            'en la pantalla anterior. Simplemente selecciona el plato clicando las veces '
+                            'necesarias. ',style: TextStyle(fontSize: 18, color: Colors.black))),
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Container(
+                      color: Colors.blue,
+                      child: const Center(child: Text('Comanda',style: TextStyle(fontSize: 30, color: Colors.white))),
+                    ),
+                    const SizedBox(height: 10,),
+                    SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.65, // 50% del ancho de la pantalla
+                        child: const Image(image: AssetImage('assets/tutorial/comanda.jpg'))
+                    ),
+                    const Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Center(child: Text('Revisa la comanda realizada. Incluso '
+                            'puedes aumentar o disminuir las cantidades aplicadas. Si dejas una cantidad a 0 el '
+                            'plato se ELIMINARÁ.  ',style: TextStyle(fontSize: 18, color: Colors.black))),
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Container(
+                      color: Colors.blue,
+                      child: const Center(child: Text('Gestión Platos',style: TextStyle(fontSize: 30, color: Colors.white))),
+                    ),
+                    const SizedBox(height: 10,),
+                    SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.5, // 50% del ancho de la pantalla
+                        child: const Image(image: AssetImage('assets/tutorial/gestion_platos.jpg'))
+                    ),
+                    const Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Center(child: Text('Cambia el estado de Favorito de los platos, para que se muestre o no '
+                            'en Familias. Añade nuevos platos a la familia FOGONES. Clicando en la '
+                            'foto cámbiala por otra de la galería de tu dispositivo.  ',style: TextStyle(fontSize: 18, color: Colors.black))),
                       ),
                     ),
                   ],
@@ -110,14 +191,12 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           style: TextButton.styleFrom(
             foregroundColor: Colors.white, shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(2)),
-            backgroundColor: Colors.teal.shade700,
+            backgroundColor: Colors.blue,
             minimumSize: const Size.fromHeight(80),
           ),
           onPressed: () async{
             final SharedPreferences prefs = await SharedPreferences.getInstance();
             await prefs.setBool('showHome', true);
-            //https://youtu.be/AmsXazhGMQ0?t=201
-
             if (!context.mounted) return;
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => const WaiterPage()));
@@ -125,25 +204,25 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           child: const Text('Comenzar...', style: TextStyle(fontSize: 24),)
       ) :
       Container(
-        padding: const EdgeInsets.symmetric(horizontal: 30),
+        padding: const EdgeInsets.symmetric(horizontal: 15),
         height: 80,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             TextButton(
-                onPressed: () => controller.jumpToPage(3),
-                child: const Text('Saltar',style: TextStyle(fontSize: 20),)),
+                onPressed: () => controller.jumpToPage(6),
+                child: const Text('Saltar',style: TextStyle(fontSize: 18),)),
             Center(
               child: SmoothPageIndicator(
                 controller: controller,
-                count: 4,
+                count: 7,
                 effect: const WormEffect(
-                  spacing: 16,
+                  spacing: 10,
                   dotColor: Colors.black87,
                   activeDotColor: Colors.indigo,
                 ),
                 onDotClicked: (index) {
-                  pageNumber = index+1;
+                  //pageNumber = index+1;
                   controller.animateToPage(
                       index,
                       duration: const Duration
@@ -153,11 +232,11 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
             ),
             TextButton(
                 onPressed: () {
-                  pageNumber++;
+                  //pageNumber++;
                   controller.nextPage(
                       duration: const Duration(milliseconds: 500) ,
                       curve: Curves.easeInOut);},
-                child: const Text('Siguiente',style: TextStyle(fontSize: 20),)),
+                child: const Text('Siguiente',style: TextStyle(fontSize: 18),)),
           ],
         ),
       ),

@@ -65,7 +65,7 @@ class _WaiterPageState extends State<WaiterPage> {
   onKeyboardTap(String value) {
     setState(() {
       password = password + value;
-      passMask = '$passMask' + '*';
+      passMask = '$passMask*';
     });
   }
 

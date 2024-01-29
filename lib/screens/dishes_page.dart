@@ -117,34 +117,13 @@ class _DishesPageState extends State<DishesPage> {
                               child: InkWell(
                                 onTap: () async {
                                     await addCommandDetail(widget.idTable, snapshot.data![index]['id']);
-                                    final snackBar = SnackBar(
-                                      content: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Text('Añadido: ${snapshot.data![index]['name']}'),
-                                          IconButton(
-                                            icon: const Icon(
-                                              Icons.add_circle_outlined,
-                                              color: Colors.white,
-                                            ), onPressed: () {  },
-                                          ),
-                                        ],
-                                      ),
-                                      behavior: SnackBarBehavior.floating,
-                                      duration: const Duration(seconds: 1),
-                                      showCloseIcon: true,
-                                      width: 400,
-                                    );
                                     if (!context.mounted) return;
-                                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                    PrettySnackBar.show(context, 'Añadido: ${snapshot.data![index]['name']}');
                                   },
                               ),
                             ),
-                            // const SizedBox(height: 8),
                             Text(snapshot.data![index]['name'], style: const TextStyle(color: Colors.white,
                               fontSize: 14, fontWeight: FontWeight.bold,),
-                              // overflow: TextOverflow.ellipsis, // Truncar el texto si es demasiado largo
-                              // maxLines: 2, // Limitar el texto a dos líneas
                             ),
                           ],
                         );

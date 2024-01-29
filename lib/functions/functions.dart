@@ -70,8 +70,7 @@ class PrettySnackBar {
         width: 400,
         duration: const Duration(seconds: 2),
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(16.0), topRight: Radius.circular(16.0)),
+          borderRadius: BorderRadius.all(Radius.circular(16.0)),
         ),
         backgroundColor: Colors.redAccent,
         // action: SnackBarAction(

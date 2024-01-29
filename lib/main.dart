@@ -9,16 +9,10 @@ Future main() async{
   runApp(MyApp(showHome: showHome,));
 }
 
-// void main() {
-//   runApp(const MyApp());
-// }
-//D:\_cifo\Flutter\gest_rest\android\app\build.gradle:
-
 class MyApp extends StatelessWidget {
   final bool showHome;
   const MyApp({super.key, required this.showHome});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

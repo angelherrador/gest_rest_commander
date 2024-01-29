@@ -5,8 +5,7 @@
 
     $id = $_POST['id'];
 
-    //sólo borrar platos de familia Fogones
-    $sql = "DELETE FROM `dishes` WHERE `id` = '$id' AND `idFamily` = 11";
+    $sql = "DELETE FROM `dishes` WHERE `id` = '$id'";
     $result = $con->query($sql);
 
     if($result){
