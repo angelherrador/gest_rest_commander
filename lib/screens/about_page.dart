@@ -15,7 +15,7 @@ class AboutPage extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 50,
-              backgroundImage: AssetImage('assets/icons/logo_gestrest.png'), // Imagen del autor
+              backgroundImage: AssetImage('assets/icons/logo_gestrest.png'),
             ),
             SizedBox(height: 20),
             Text(
@@ -24,7 +24,7 @@ class AboutPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'Nombre de la Aplicación',
+              'Dinner Resto',
               style: TextStyle(fontSize: 20),
             ),
             SizedBox(height: 10),
@@ -57,7 +57,7 @@ class AboutPage extends StatelessWidget {
               children: [
                 Icon(Icons.photo_camera),
                 SizedBox(width: 5),
-                Text('@instagram'),
+                Text('@dinnerresto'),
               ],
             ),
             SizedBox(height: 10),
@@ -66,7 +66,7 @@ class AboutPage extends StatelessWidget {
               children: [
                 Icon(Icons.facebook),
                 SizedBox(width: 5),
-                Text('Facebook'),
+                Text('facebook.com/dinnerresto'),
               ],
             ),
           ],
