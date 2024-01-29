@@ -33,7 +33,6 @@ class _RoomPageState extends State<RoomPage> {
         list.addAll(redX);
         _streamController.add(redX);
       });
-      //print(list);
     }
   }
 
@@ -80,7 +79,6 @@ class _RoomPageState extends State<RoomPage> {
                   itemBuilder: (context, index) {
                     return ListTile(
                       title: Text(snapshot.data![index]['name'],style: const TextStyle(fontSize: 26),),
-                      //subtitle: Text(snapshot.data![index]['image']),
                       subtitle: const Text(" "),
                       leading: InkWell(
                         onTap: (){
@@ -94,7 +92,6 @@ class _RoomPageState extends State<RoomPage> {
                               )));
                         },
                         child:
-                          //Image.network('$vImageUrl/${snapshot.data![index]['image']}',width: imageWidth))
                           Container(
                               width: 120,
                               height: 120,
@@ -119,7 +116,6 @@ class _RoomPageState extends State<RoomPage> {
             }else if(snapshot.hasError){
               return const Center(child: Text('Se ha producido un error. No hay datos disponibles !!!'));
             }
-            //return const Center(child: Text("Server Error!!!"));
             return const Center(child: CircularProgressIndicator());
           }, // builder:
         )

@@ -11,14 +11,12 @@ class FamilyPage extends StatefulWidget {
 
   final String idWaiter;
   final String idTable;
-  //final String numCommander;
 
   @override
   State<FamilyPage> createState() => _FamilyPageState();
 }
 
 class _FamilyPageState extends State<FamilyPage> {
-
 
   List listFavorites = [];
   List listFamilies = [];
@@ -38,7 +36,6 @@ class _FamilyPageState extends State<FamilyPage> {
         listFavorites.addAll(redX);
         _streamController.add(redX);
       });
-      //print(listFavorites);
     }
   }
   Future readDataFamilies() async {
@@ -53,7 +50,6 @@ class _FamilyPageState extends State<FamilyPage> {
         listFamilies.addAll(redX);
         _streamControllerFamilies.add(redX);
       });
-      //print(listFamilies);
     }
   }
 
@@ -80,7 +76,6 @@ class _FamilyPageState extends State<FamilyPage> {
     getDataFamilies();
   }
 
-
   getDataFavorites() async {
     await readDataFavorites();
   }
@@ -103,7 +98,6 @@ class _FamilyPageState extends State<FamilyPage> {
               scrollDirection: Axis.horizontal,
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
-              //children: <Widget>[
                 return
                   _buildFavorites(snapshot.data![index]['name'],
                       '$vImageUrl/${snapshot.data![index]['directory']}/${snapshot.data![index]['image']}',
@@ -115,7 +109,6 @@ class _FamilyPageState extends State<FamilyPage> {
             return const Center(child: Text('Se ha producido un error. No hay datos disponibles !!!'));
           }
           return const Center(child: CircularProgressIndicator());
-          //return const Center(child: Text('Sin Favoritos!!'));
         } //builder
       ),
     );
@@ -150,9 +143,9 @@ class _FamilyPageState extends State<FamilyPage> {
                 if (snapshot.hasData) {
                     return GridView.builder(
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3, // number of items in each row
-                      mainAxisSpacing: 8.0, // spacing between rows
-                      crossAxisSpacing: 8.0, // spacing between columns
+                      crossAxisCount: 3, // cols
+                      mainAxisSpacing: 8.0, // space between rows
+                      crossAxisSpacing: 8.0, // space between columns
                     ),
                     padding: const EdgeInsets.all(8.0), // padding around the grid
                     itemCount: snapshot.data!.length, //families.length, // total number of items
@@ -172,7 +165,7 @@ class _FamilyPageState extends State<FamilyPage> {
                                 ),
                                 boxShadow: const [
                                   BoxShadow(
-                                    color: Colors.grey, //Color(0xffA4A4A4),
+                                    color: Colors.grey,
                                     offset: Offset(1.0, 5.0),
                                     blurRadius: 3.0,
                                   ),
@@ -290,7 +283,7 @@ Builder _buildFavorites(String label, String favoriteImage, idTable, idDish) {
           ),
           boxShadow: const [
             BoxShadow(
-              color: Colors.grey, //Color(0xffA4A4A4),
+              color: Colors.grey,
               offset: Offset(1.0, 5.0),
               blurRadius: 3.0,
             ),
@@ -298,20 +291,7 @@ Builder _buildFavorites(String label, String favoriteImage, idTable, idDish) {
       child: InkWell(
         onTap: ()  async {
           await addCommandDetail(idTable, idDish);
-          // final snackBar = SnackBar(
-          //   content: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //     children: [
-          //       Text('Añadido: $label'),
-          //     ],
-          //   ),
-          //   behavior: SnackBarBehavior.floating,
-          //   duration: const Duration(seconds: 1),
-          //   showCloseIcon: true,
-          //   width: 400,
-          // );
-          // if (!context.mounted) return;
-          // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
           if (!context.mounted) return;
           PrettySnackBar.show(context, 'Añadido: $label');
         },

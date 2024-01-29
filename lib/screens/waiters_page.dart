@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../functions/functions.dart';
 import 'package:onscreen_num_keyboard/onscreen_num_keyboard.dart';
 import 'dishes_crud.dart';
+import 'about_page.dart';
 
 class WaiterPage extends StatefulWidget {
    const WaiterPage({super.key});
@@ -159,7 +160,14 @@ class _WaiterPageState extends State<WaiterPage> {
               ListTile(
                 leading: const Icon(Icons.align_vertical_bottom_outlined),
                 title: const Text("Acerca de..."),
-                onTap: () {},
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                          const AboutPage()));
+                },
               )
             ],
           ),
@@ -194,7 +202,6 @@ class _WaiterPageState extends State<WaiterPage> {
                   }else if(snapshot.hasError){
                     return const Center(child: Text('Se ha producido un error. No hay datos disponibles !!!'));
                   }
-                  //return const Center(child: Text("Server Error!!!"));
                   return const Center(child: CircularProgressIndicator());
                 }, // builder:
               ),

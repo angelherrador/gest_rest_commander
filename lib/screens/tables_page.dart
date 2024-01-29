@@ -102,9 +102,9 @@ class _TablePageState extends State<TablePage> {
             if (snapshot.hasData) {
               return GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, // number of items in each row
-                  mainAxisSpacing: 2.0, // spacing between rows
-                  crossAxisSpacing: 4.0, // spacing between columns
+                  crossAxisCount: 2, // cols
+                  mainAxisSpacing: 2.0, // space between rows
+                  crossAxisSpacing: 4.0, // space between columns
                 ),
                 padding: const EdgeInsets.all(20.0), // padding around the grid
                 itemCount: snapshot.data!.length, //families.length, // total number of items
@@ -125,13 +125,6 @@ class _TablePageState extends State<TablePage> {
 
                               fit: BoxFit.contain,
                             ),
-                            // boxShadow: const [
-                            //   BoxShadow(
-                            //     color: Colors.grey, //Color(0xffA4A4A4),
-                            //     offset: Offset(1.0, 5.0),
-                            //     blurRadius: 3.0,
-                            //   ),
-                            // ]
                         ),
                         child: InkWell(
                           onTap: () async {
@@ -154,7 +147,6 @@ class _TablePageState extends State<TablePage> {
                             if (refresh == true) {
                               await getData(widget.idRoom);
                             }
-                            //await readData(widget.idRoom); //refreshPage();
                           },
                         ),
                       ),
@@ -166,7 +158,6 @@ class _TablePageState extends State<TablePage> {
             }else if(snapshot.hasError){
               return const Center(child: Text('Se ha producido un error. No hay datos disponibles !!!'));
             }
-            //return const Center(child: Text("Server Error!!!"));
             return const Center(child: CircularProgressIndicator());
           }, // builder:
         )

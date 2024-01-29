@@ -35,37 +35,8 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Center(
         child: RiveAnimation.network(
           '$vApiUrl/splash_logo.riv',
-          //animations: ['blink','5+'],
-          //artBoard(''),
         ),
       ),
     );
   }
 }
-
-
-
-
-//   Widget build(BuildContext context) {
-//     return AnimatedSplashScreen(
-//         splash: Lottie.asset('assets/NikeSplashScreen.json'),
-//         //splash: Lottie.asset('assets/DinnerResto.json'),
-//         splashIconSize: 250,
-//         backgroundColor: widget.showHome ? Colors.black: Colors.green,
-//         pageTransitionType: PageTransitionType.fade,
-//         nextScreen: widget.showHome ? const FamilyPage() : const OnBoardingPage());
-//   }
-// }
-
-// @override
-// Widget build(BuildContext context) {
-//   return const Scaffold(
-//     body: Center(
-//       child: RiveAnimation.network(
-//         'https://url/logos/splash_logo.riv',
-//         //animations: ['blink','5+'],
-//         //artBoard(''),
-//       ),
-//     ),
-//   );
-// }

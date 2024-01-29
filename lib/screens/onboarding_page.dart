@@ -222,7 +222,6 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   activeDotColor: Colors.indigo,
                 ),
                 onDotClicked: (index) {
-                  //pageNumber = index+1;
                   controller.animateToPage(
                       index,
                       duration: const Duration
@@ -232,7 +231,6 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
             ),
             TextButton(
                 onPressed: () {
-                  //pageNumber++;
                   controller.nextPage(
                       duration: const Duration(milliseconds: 500) ,
                       curve: Curves.easeInOut);},

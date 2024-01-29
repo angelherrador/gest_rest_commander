@@ -330,7 +330,7 @@ class _DishesState extends State<Dishes> {
                               ),
                               boxShadow: const [
                                 BoxShadow(
-                                  color: Colors.grey, //Color(0xffA4A4A4),
+                                  color: Colors.grey,
                                   offset: Offset(1.0, 5.0),
                                   blurRadius: 3.0,
                                 ),
@@ -373,18 +373,6 @@ class _DishesState extends State<Dishes> {
           }, // builder:
         )
 
-      // //pequeño selector de imagen
-      // Column(
-      //   children: [
-      //     ElevatedButton(onPressed: (){
-      //       getImg();
-      //     }, child: const Text('PicImage')),
-      //
-      //     Container(
-      //       child: img == null ? Container() : Image.file(File(img!.path)),
-      //     ),
-      //   ],
-      // ),
     );
   }
 }

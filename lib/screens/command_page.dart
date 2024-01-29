@@ -21,8 +21,6 @@ class _CommandPageState extends State<CommandPage> {
   String vApiUrl = '$vApiUrlP/commander';
   String vImageUrl='$vApiUrlI/dishes';
 
-
-
   Future readData(idTable) async {
     var vFile="readData.php?idTable=$idTable";
     var url = "$vApiUrl/$vFile";
@@ -35,7 +33,6 @@ class _CommandPageState extends State<CommandPage> {
         list.addAll(redX);
         _streamController.add(redX);
       });
-      //print(list);
     }
   }
 
@@ -49,8 +46,6 @@ class _CommandPageState extends State<CommandPage> {
     });
 
     if (res.statusCode == 200){
-      //var redX = jsonDecode(res.body);
-      //print(redX);
       getData();
     }
   }
@@ -75,12 +70,8 @@ class _CommandPageState extends State<CommandPage> {
     await readData(widget.idTable);
   }
 
-
-
   @override
   Widget build(BuildContext context) {
-    // var imageWidth =
-    //     MediaQuery.of(context).size.width *0.25; //% del ancho de pantalla
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.blueAccent,
@@ -98,7 +89,6 @@ class _CommandPageState extends State<CommandPage> {
                   itemBuilder: (context, index) {
                     return ListTile(
                       title: Text(snapshot.data![index]['name'],style: const TextStyle(fontSize: 16),),
-                      //subtitle: Text(snapshot.data![index]['image']),
                       subtitle: Text(snapshot.data![index]['modifiers']),
                       leading: InkWell(
                         onTap: (){
@@ -130,13 +120,8 @@ class _CommandPageState extends State<CommandPage> {
                           IconButton(
                             onPressed: () async {
                               vQuantity++;
-                              //await updateQuantity(widget.idTable, snapshot.data![index]['idDish'], vQuantity.toString());
                               await updateQuantity(widget.idTable, snapshot.data![index]['idDish'], '1');
                               await getData();
-
-                              // setState(() {
-                              //   updateData(index, vQuantity);
-                              // });
                             },
                             icon: const Icon(
                               Icons.add_circle_outlined,
@@ -151,9 +136,6 @@ class _CommandPageState extends State<CommandPage> {
                               vQuantity--;
                               await updateQuantity(widget.idTable, snapshot.data![index]['idDish'], '-1');
                               await getData();
-                              // setState(() {
-                              //   updateData(index, vQuantity);
-                              // });
                             },
                             icon: const Icon(
                               Icons.remove_circle_outlined,
@@ -169,7 +151,6 @@ class _CommandPageState extends State<CommandPage> {
               return const Center(child: Text('Se ha producido un error. No hay datos disponibles !!!'));
             }
             return const Center(child: Text("Sin comanda añadida!!!"));
-            //return const Center(child: CircularProgressIndicator());
           }, // builder:
         )
     );
